@@ -5,7 +5,7 @@
 #include <list>
 #include <map>
 #include <string>
-#include <fstream>
+
 using namespace std;
 //узел дерева
 class Node
@@ -31,9 +31,10 @@ public:
         right = r;
         count = l->count + r->count;
     }
-
+    // Печатать коды Хаффмана
     static void Print(Node* root, int depth = 0)
     {
+        //Если корень равен Null, то return
         if (!root) return;
 
         if (root->symbol)
@@ -105,7 +106,7 @@ int main()
     map<char, int>::iterator itr;
     for (itr = symbols.begin(); itr != symbols.end(); itr++)
     {
-        Node* p = new Node(itr->first, itr->second);
+        Node* p = new Node(itr->first, itr->second); 
         trees.push_back(p);
     }
     if (trees.size() == 0) {
@@ -115,9 +116,9 @@ int main()
     }
     else
     {
-        if (trees.size() == 1)
+        if (trees.size() == 1)  
         {
-            Node* root = trees.front();
+            Node* root = trees.front(); //root - указатель на вершину 
             root->Print(root);
             cout << " - " << a << endl;
             cout << a << endl;
@@ -125,21 +126,21 @@ int main()
         }
         else
         {
-            while (trees.size() != 1)
+            while (trees.size() != 1) //пока в моем списке не останется 1 элемент
 
             {
-                trees.sort(SortNode);
+                trees.sort(SortNode); //сортирую
 
                 Node* l = trees.front();
                 trees.pop_front();
-                Node* r = trees.front();
+                Node* r = trees.front();    
                 trees.pop_front();
 
-                Node* parent = new Node(l, r);
+                Node* parent = new Node(l, r);   
                 trees.push_back(parent);
             }
 
-            Node* root = trees.front();
+            Node* root = trees.front(); //root - указатель на вершину 
             root->Print(root);
 
             vector<bool> code;
